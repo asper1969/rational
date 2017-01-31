@@ -1,0 +1,203 @@
+@import "vars";
+
+@mixin centerer($horizontal: true, $vertical: true) {
+  position: absolute;
+  @if ($horizontal and $vertical) {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  } @else if ($horizontal) {
+    left: 50%;
+    transform: translate(-50%, 0);
+  } @else if ($vertical) {
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+}
+
+@mixin icon($w, $h, $sprite-name){
+  content: '';
+  display: block;
+  width: $w;
+  height: $h;
+  position: absolute;
+
+  @include icons-sprite($sprite-name);
+};
+
+@mixin flexboxer($justify: flex-start, $align: flex-start, $direction: row){
+  @include flexbox((
+          display: box,
+          box-orient: vertical,
+          flex-wrap:wrap,
+          align-items: $align,
+          justify-content: $justify
+  ), $version: 1);
+  @include flexbox((
+          display: flexbox,
+          flex-wrap:wrap,
+          flex-direction: $direction,
+          align-items: $align,
+          justify-content: $justify
+  ), $version: 2);
+  @include flexbox((
+          display: flex,
+          flex-wrap:wrap,
+          flex-direction: $direction,
+          align-items: $align,
+          justify-content: $justify
+  ));
+}
+
+@mixin vericalAlign(){
+  &:before {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%; width: .1px;
+  }
+}
+
+@mixin transite($property: all, $duration: .3s, $timing: easy-in, $delay: 0s){
+  @include transition-property($property);
+  @include transition-duration($duration);
+  @include transition-timing-function($timing);
+  @include transition-delay($delay);
+}
+
+@mixin reset-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@mixin respond-to($point) {
+  @if $point == 320 {
+    @media only screen and (max-width: 767px) { @content; }
+  }
+  @else if $point == 768 {
+    @media only screen and (max-width: 959px) { @content; }
+  }
+  @else if $point == 960 {
+    @media only screen and (max-width: 1199px) { @content; }
+  }
+  @else if $point == 1200 {
+    @media only screen and (min-width: 1200px) { @content; }
+  }
+}
+
+@mixin btn(){
+  width: 180px;
+  height: 40px;
+  display: block;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: center;
+  padding-top: 14px;
+  padding-bottom: 13px;
+  font-size: 12px;
+  font-style: normal;
+  line-height: 14px;
+  font-weight: 700;
+  color: $c-btn-txt;
+  background: $c-btn;
+  text-transform: uppercase;
+
+  @include transite(all);
+
+  &:hover{
+    background: $c-btn-hover;
+  }
+}
+
+@mixin rounded-btn($bg: transparent, $bg-hover: transparent,$border-color: #fff){
+  display: block;
+  background: $bg;
+  margin: 0 auto;
+  color: $c-btn-text;
+  font-weight: 800;
+  text-align: center;
+  border: 2px solid $border-color;
+  text-transform: uppercase;
+  width: 165px;
+  padding-top: 11px;
+  padding-bottom: 9px;
+
+  @include border-radius(20px);
+  @include transite(all);
+
+  &:hover{
+    background: $bg-hover;
+  }
+}
+
+@mixin resize-sprite($sprite, $percent, $map: $icons-sprites) {
+  $spritePath:    sprite-path($map);
+  $spriteWidth:   image-width($spritePath);
+  $spriteHeight:  image-height($spritePath);
+  $width: image-width(sprite-file($map, $sprite));
+  $height: image-height(sprite-file($map, $sprite));
+
+  @include background-size(ceil($spriteWidth * ($percent/100)) ceil($spriteHeight * ($percent/100)));
+  width: ceil($width*($percent/100));
+  height: ceil($height*($percent/100));
+  background-position: 0 floor(nth(sprite-position($map, $sprite), 2)  * ($percent/100) );
+}
+
+@mixin triangle($bg: #fff){
+
+  &:after{
+    position: absolute;
+    content: "";
+    display: block;
+    width: 120%;
+    height: 100%;
+    background: $bg;
+    bottom: -98%;
+    left: 0;
+    z-index: 9999;
+
+    @include transform-origin(0);
+    @include transform(rotate(-7deg));
+  }
+}
+
+@mixin triangle-upside($bg: #fff){
+
+  &:after{
+    position: absolute;
+    content: "";
+    display: block;
+    width: 200%;
+    height: 100%;
+    background: $bg;
+    bottom: -100%;
+    left: 0;
+    z-index: 5;
+
+    @include transform-origin(0);
+    @include transform(rotate(-7deg));
+  }
+}
+@mixin absolute-align(){
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+@mixin absolute-margin(){
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  @include transform(translate(-50%,-50%));
+}

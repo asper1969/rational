@@ -1,0 +1,50 @@
+name = rational
+description =  rational theme.
+core = 7.x
+
+
+; ========================================
+; Regions
+; ========================================
+
+regions[slogan]    =   'Slogan'
+regions[split]     =   'Split'
+regions[logo_shop]      =   'Logo shop'
+regions[search_shop]    =   'Search shop'
+regions[info_shop]      =   'Info shop'
+regions[cart_shop]      =   'Cart shop'
+regions[slider_shop]    =   'Slider shop'
+regions[catalog_shop]   =   'Catalog shop'
+regions[popular_shop]   =   'Popular shop'
+regions[shares_shop]    =   'Shares shop'
+regions[news_shop]      =   'News shop'
+regions[footer_left_shop]   =   'Footer left shop'
+regions[socials_shop]   =   'Socials shop'
+regions[copy_shop]      =   'Copyright'
+regions[main_prefix]  = 'Main Region Prefix'
+regions[content]      = 'Main Region'
+regions[main_suffix]  = 'Main Region Suffix'
+
+; ========================================
+; Stylesheets
+; ========================================
+
+stylesheets[all][] = 'css/screen.css'
+stylesheets[all][] = 'css/magnific-popup.css'
+
+; ========================================
+; Scripts
+; ========================================
+
+scripts[] = js/bxslider.js
+scripts[] = js/jquery.cycle2.min.js
+scripts[] = js/jquery.cycle2.swipe.min.js
+scripts[] = js/jquery.touchSwipe.min.js
+scripts[] = js/jquery.magnific-popup.min.js
+scripts[] = js/script.js
+
+; ========================================
+; Modernizr
+; ========================================
+
+modernizr[tests][] = css_boxsizing
